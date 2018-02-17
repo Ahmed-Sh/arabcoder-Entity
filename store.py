@@ -3,12 +3,10 @@ class MemberStore:
   members = []
   last_id=1
 
-  def __contains__(self, id):
-        if self.get_by_id(id)!=None:
-          return True
-        return False  
+  #def __contains__(self, id):
+    #return self.get_by_id(id)!=None
+      
           
-
   def get_all(self):
     return MemberStore.members
 
@@ -16,24 +14,27 @@ class MemberStore:
       # append member
         member.id=MemberStore.last_id
         MemberStore.members.append(member)
-        MemberStore.last_id =member.id+1
+        MemberStore.last_id +=1
 
   def entity_exists(self, member):
       # checks if an entity exists in a store
-    return member.id in self           
+    return member in MemberStore.members          
 
 
   def get_by_id(self, id):
       # search for member by id
+      gotten_member=None
       for member in MemberStore.members:
         if member.id==id:
-          return member
-      return None 
+          gotten_member=member
+          break
+      return gotten_member
+      
 
   def delete(self, id):
      # delete member by id
-    if id in self: 
-      member=self.get_by_id(id)
+    member=self.get_by_id(id) 
+    if self.entity_exists(member): 
       MemberStore.members.remove(member)
   
 

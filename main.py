@@ -13,20 +13,39 @@ memberStore1.add(member2)
 postStore1.add(post1)
 postStore1.add(post2)
 postStore1.add(post3)
-print "test 1 befor delete --------------------------"
-for member in memberStore1.get_all():
-	print member
-for post in postStore1.get_all():
-	print post
-print "test 2 after delete --------------------------"
-memberStore1.delete(2)
-for member in memberStore1.get_all():
-	print member
-for post in postStore1.get_all():
-	print post
-print "test 3  --------------------------"
-print memberStore1.entity_exists(member2)
-print memberStore1.entity_exists(member1)
+
+def print_all_member():
+	print 30*"="+"names"
+	for member in memberStore1.get_all():
+		print member
+def print_all_post():
+	print 30*"="+"posts"
+	for post in postStore1.get_all():
+		print post
+
+
+def check_member(member):
+	if memberStore1.entity_exists(member):
+		print "this member is alredy exist"
+	else:
+		print "not found"	
+
+
+def print_all_same_members(name):
+	print 30*"="+name+" members"
+	for member in memberStore1.get_by_name(name):
+		print member
+def update_member(member):
+	new_name=raw_input("enter the new name:")
+	new_age=raw_input("enter the new age:")
+	memberStore1.update(member,new_name,new_age)
+
+print_all_member()
+update_member(member1)
+print_all_member()
+update_member(member2)
+print_all_same_members("mohamed")
+check_member(member1)
 
 
 

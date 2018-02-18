@@ -18,17 +18,17 @@ class MemberStore:
 
   def entity_exists(self, member):
       # checks if an entity exists in a store
-    return member in MemberStore.members          
+    return member in self.get_all()          
 
 
   def get_by_id(self, id):
       # search for member by id
-      gotten_member=None
-      for member in MemberStore.members:
+      result=None
+      for member in self.get_all():
         if member.id==id:
-          gotten_member=member
+          result=member
           break
-      return gotten_member
+      return result
       
 
   def delete(self, id):
@@ -36,7 +36,15 @@ class MemberStore:
     member=self.get_by_id(id) 
     if self.entity_exists(member): 
       MemberStore.members.remove(member)
-  
+
+  def update(self,member,new_name,new_age):
+    member.name=new_name
+    member.age=new_age
+
+  def get_by_name(self,name):
+    result=[member for member in self.get_all() if member.name==name]
+    return result
+ 
 
 #-----------------------------------------------------------------------------------------------
 

@@ -3,7 +3,7 @@ class member():
 	def __init__(self, name,age):
 		self.name = name
 		self.age=age
-		self.id=0
+		self.id=0	
 
 	def __str__(self):
 		return "id: "+str(self.id) +"\nname:" +self.name+"\n=================="	

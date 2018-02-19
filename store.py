@@ -1,6 +1,7 @@
 class MemberStore:
 
   members = []
+ 
   last_id=1
 
   #def __contains__(self, id):
@@ -18,8 +19,7 @@ class MemberStore:
 
   def entity_exists(self, member):
       # checks if an entity exists in a store
-    return member in self.get_all()          
-
+    return member in self.get_all()
 
   def get_by_id(self, id):
       # search for member by id
@@ -42,9 +42,10 @@ class MemberStore:
     member.age=new_age
 
   def get_by_name(self,name):
-    result=[member for member in self.get_all() if member.name==name]
-    return result
- 
+    
+    for member in self.get_all():
+      if member.name==name:
+        yield member
 
 #-----------------------------------------------------------------------------------------------
 

@@ -3,16 +3,16 @@ class member():
 	def __init__(self, name,age):
 		self.name = name
 		self.age=age
-		self.id=0	
+		self.id=0
+		self.posts=[]	
 
 	def __str__(self):
 		return "id: "+str(self.id) +"\nname:" +self.name+"\n=================="	
-class post():
-	def __init__(self, title,subject):
+class Post():
+	def __init__(self, title,subject,member_id=0):
 		self.title = title
 		self.subject=subject
+		self.id=0
+		self.member_id=member_id
 	def __str__(self):
 		return "Title: "+self.title +"\n" +self.subject+"\n=================="
-		
-						
-		

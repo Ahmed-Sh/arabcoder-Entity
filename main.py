@@ -136,7 +136,7 @@ get_by_id_should_retrieve_same_object(member_store, member2)
 
 update_should_modify_object(member_store, member3)
 
-catch_exception_when_deleting()
+#catch_exception_when_deleting()
 
 print_all_members(member_store)
 

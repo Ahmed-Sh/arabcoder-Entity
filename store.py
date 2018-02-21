@@ -1,3 +1,4 @@
+import itertools
 class MemberStore:
 
   members = []
@@ -52,34 +53,20 @@ class MemberStore:
     for member in self.get_all():
       if member.name==name:
         yield member
-  def get_members_with_posts(self,all_post):
-    for post in all_post:
-      member_id=post.member_id
-      member=self.get_by_id(member_id)
-      if self.entity_exists(member):
-        member.posts.append(post)
-      self.update(member)  
-    return self.get_all()
-  def get_top_two(self,all_post):
-    first_member=0
-    second_member=0
-    member1=None
-    member2=None
-    top_two=[]
-    for member in self.get_all():
-      post_num= len(member.posts)
-      if post_num>=first_member:
-        member2=member1
-        second_member =first_member 
-        member1=member
-        first_member=post_num
-      elif post_num>=second_member:
-        member2=member
-        second_member =post_num     
-    top_two=[member1,member2]
-    return top_two
 
-          
+  def get_members_with_posts(self,all_post):
+    all_members=self.get_all()
+    for member, post in itertools.product(all_members, all_post):
+      if member.id==post.member_id:
+        member.posts.append(post)
+          #self.update(member)  
+    return self.get_all() 
+
+  def  get_top_two(self,all_post):
+    sorted_members=sorted(self.get_members_with_posts(all_post))
+    return sorted_members[:2]
+
+        
 
 #-----------------------------------------------------------------------------------------------
 

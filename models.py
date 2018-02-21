@@ -4,7 +4,11 @@ class member():
 		self.name = name
 		self.age=age
 		self.id=0
-		self.posts=[]	
+		self.posts=[]
+
+	def __cmp__(self,other):
+		return cmp(len(other.posts),len(self.posts))
+		
 
 	def __str__(self):
 		return "id: "+str(self.id) +"\nname:" +self.name+"\n=================="	

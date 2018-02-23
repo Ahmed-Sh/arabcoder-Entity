@@ -69,7 +69,7 @@ def store_should_get_members_by_name(member_store):
 def catch_exception_when_deleting():
     try:
         member_store.delete(5)
-    except ValueError:
+    except :
         print("It should be an existence entity before deleting !")
 
 
@@ -120,6 +120,7 @@ def store_should_get_top_two(member_store, post_store):
         print str(member_with_posts)+ "has posts:"
         for post in member_with_posts.posts:
             print "\t"+str(post)
+            
 
 members_instances = create_members()
 member1, member2, member3 = members_instances
@@ -136,7 +137,7 @@ get_by_id_should_retrieve_same_object(member_store, member2)
 
 update_should_modify_object(member_store, member3)
 
-#catch_exception_when_deleting()
+catch_exception_when_deleting()
 
 print_all_members(member_store)
 
@@ -148,14 +149,17 @@ posts_instances = create_posts(members_instances)
 post1, post2, post3, post4, post5, post6, post7, post8, post9 = posts_instances
 
 post_store = store.PostStore()
-
+def print_all_post_byDate():
+    post_store=store.PostStore()
+    print 30*"="+"posts"
+    for post in post_store.get_posts_by_date():
+        print post
 
 store_should_add_posts(posts_instances, post_store)
 
 store_should_get_members_with_posts(member_store, post_store)
-print "test--------------"
 store_should_get_top_two(member_store, post_store)
-
+print_all_post_byDate()
 
 
 

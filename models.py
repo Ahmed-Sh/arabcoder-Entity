@@ -1,3 +1,4 @@
+import datetime
 class member():
 	"""docstring for ClassName"""
 	def __init__(self, name,age):
@@ -11,12 +12,13 @@ class member():
 		
 
 	def __str__(self):
-		return "id: "+str(self.id) +"\nname:" +self.name+"\n=================="	
+		return "id: "+str(self.id) +"\nname:" +self.name+"\n"+30*"="	
 class Post():
 	def __init__(self, title,subject,member_id=0):
 		self.title = title
 		self.subject=subject
 		self.id=0
 		self.member_id=member_id
+		self.date = datetime.datetime.now()
 	def __str__(self):
-		return "Title: "+self.title +"\n" +self.subject+"\n=================="
+		return "Title: "+self.title +"\n" +self.subject+"\n"+str(self.date)+"\n"+30*"="

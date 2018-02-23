@@ -1,58 +1,66 @@
 import itertools
-class MemberStore:
-
-  members = []
- 
-  last_id=1
-
-  #def __contains__(self, id):
-    #return self.get_by_id(id)!=None
-      
-          
+class BaseStore():
+  def __init__(self,data_provider, last_id):
+    self.data_provider=data_provider
+    self.last_id=last_id
   def get_all(self):
-    return MemberStore.members
+    return self.data_provider
 
-  def add(self, member):
+  def add(self, item):
       # append member
-        member.id=MemberStore.last_id
-        MemberStore.members.append(member)
-        MemberStore.last_id +=1
+        item.id=self.last_id
+        self.data_provider.append(item)
+        self.last_id +=1
 
-  def entity_exists(self, member):
+  def entity_exists(self, item):
       # checks if an entity exists in a store
-    return member in self.get_all()
+    return item in self.get_all()
 
   def get_by_id(self, id):
-      # search for member by id
+      # search for item by id
       result=None
-      for member in self.get_all():
-        if member.id==id:
-          result=member
+      for item in self.get_all():
+        if item.id==id:
+          result=item
           break
       return result
       
 
   def delete(self, id):
-     # delete member by id
-    member=self.get_by_id(id) 
-    if self.entity_exists(member): 
-      MemberStore.members.remove(member)
+     # delete item by id
+    item=self.get_by_id(id) 
+    self.data_provider.remove(item)
 
-  def update(self, member):
-     result = member
-     all_members = self.get_all()
+  def update(self, item):
+     result = item
+     all_items = self.get_all()
 
-     for index, current_member in enumerate(all_members):
-         if current_member.id == member.id:
-             all_members[index] = member
+     for index, current_item in enumerate(all_items):
+         if current_item.id == item.id:
+             all_items[index] = item
              break
 
      return result
+  
+
+#---------------------------------------------------------------------------------------    
+
+class MemberStore(BaseStore):
+
+
+  members = []
+  last_id=1
+  def __init__(self):
+        BaseStore.__init__(self,MemberStore.members, MemberStore.last_id)
+
+  #def __contains__(self, id):
+    #return self.get_by_id(id)!=None
+      
   def get_by_name(self,name):
-    
     for member in self.get_all():
       if member.name==name:
-        yield member
+        yield member      
+
 
   def get_members_with_posts(self,all_post):
     all_members=self.get_all()
@@ -70,18 +78,20 @@ class MemberStore:
 
 #-----------------------------------------------------------------------------------------------
 
-class PostStore:
+class PostStore(BaseStore):
 
   posts = []
-  
-  def get_all(self):
-    return PostStore.posts
+  last_id=1
+  def __init__(self):
+        BaseStore.__init__(self,PostStore.posts, PostStore.last_id)
+  def get_posts_by_date(self):
+    all_posts=self.get_all()
+    posts_sorted_byDate=sorted(all_posts, key=lambda post: post.date)
+    return posts_sorted_byDate     
 
-  def add(self, post):
-    PostStore.posts.append(post)
+        
 
-  def entity_exists(self, post): 
-        return post in PostStore.posts
+
 
 
    

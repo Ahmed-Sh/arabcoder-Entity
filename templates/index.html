@@ -1,11 +1,13 @@
 <!doctype html>
+<link rel="stylesheet" type="text/css" href="/static/style.css" >
 <head>
-	<meta charset="utf-8">
 	<title>My 1st page</title>
+  
 
 </head>
 <body>
-	<h1>My firest site</h1>
+  <div id="my_header">
+    <h1>My firest site</h1>
 	<button type="button"> 
 		<a href="#profile">Profile</a>
 	</button>
@@ -15,32 +17,30 @@
 	<button type="button"> 
 		<a href="#top">Top Members</a>
 	</button>
+</div>
+  
 	<hr>
 	<button type="button"> 
 		<a href="#Create">Create</a>
 	</button>
 	<ul>
-  <table >
+  <table>
+    <col width="130">
+    <col width="130">
+    <col width="130">
   <tr>
-    <th>Titel</th>
-    <th>Edit</th> 
-    <th>Delete</th>
+    <th align="left">Titel </th>
+    <th align="left">Edit</th> 
+    <th align="left">Delete</th>
   </tr>
+  {% for post in posts %}
   <tr>
-    <td>topic1</td>
+    <td>{{post.title}}</td>
     <td><button>edit</button></td>
     <td><button>delete</button></td>
   </tr>
-  <tr>
-    <td>topic1</td>
-    <td><button>edit</button></td>
-    <td><button>delete</button></td>
-  </tr>
-  <tr>
-    <td>topic1</td>
-    <td><button>edit</button></td>
-    <td><button>delete</button></td>
-  </tr>
+  {% endfor %}
+  
 </table>
 </ul>
 </body>

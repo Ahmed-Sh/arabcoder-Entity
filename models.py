@@ -1,5 +1,5 @@
 import datetime
-class member():
+class Member():
 	"""docstring for ClassName"""
 	def __init__(self, name,age):
 		self.name = name
